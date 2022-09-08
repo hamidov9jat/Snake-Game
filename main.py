@@ -28,25 +28,28 @@ while game_is_on:
     screen.update()
     time.sleep(0.1)
     sn.move()
+    if sn.bite_itself():
+        game_is_on = False
+        score_board.game_over()
+    # # Detect collision with tail.
+    # for segment in sn.segments[1:]:
+    #     if sn.head.distance(segment) < 10:
+    #         game_is_on = False
+    #         score_board.game_over()
 
-    # Detect collision with tail.
-    for segment in sn.segments:
-        if segment == sn.head:
-            continue
-        elif sn.head.distance(segment) < 10:
-            game_is_on = False
-            score_board.game_over()
-
-        # Detect collision with wall.
-        # if sn.head.xcor() > 280 or sn.head.xcor() < -280 or sn.head.ycor() > 280 or sn.head.ycor() < -280:
-        #     game_is_on = False
-        #     # scoreboard.game_over()
+    # Detect collision with wall.
+    # if sn.head.xcor() > 280 or sn.head.xcor() < -280 or sn.head.ycor() > 280 or sn.head.ycor() < -280:
+    #     game_is_on = False
+    #     # scoreboard.game_over()
 
     # Detect collision with food.
     if sn.head.distance(fd) < 15:
         fd.refresh()
         sn.extend()
         score_board.increase_score()
+        if sn.bite_itself():
+            game_is_on = False
+            score_board.game_over()
 
 screen.exitonclick()
 

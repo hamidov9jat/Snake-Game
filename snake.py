@@ -101,3 +101,10 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def bite_itself(self):
+        # Detect collision with tail.
+        for segment in self.segments[1:]:
+            if self.head.distance(segment) < 10:
+                return True
+        return False
