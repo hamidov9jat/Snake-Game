@@ -27,6 +27,12 @@ while game_is_on:
     time.sleep(0.1)
     sn.move()
 
+    # Detect collision with food.
+    if sn.head.distance(fd) < 15:
+        fd.refresh()
+        # sn.extend()
+        # scoreboard.increase_score()
+
 screen.exitonclick()
 
 

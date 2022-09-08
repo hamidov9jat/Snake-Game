@@ -1,3 +1,4 @@
+import turtle
 from turtle import Turtle
 from turtle import Screen
 
@@ -18,25 +19,36 @@ class Snake:
         self.scn_w = sn_screen.window_width()
         self.scn_h = sn_screen.window_height()
 
+    def add_segment(self, position: turtle.Vec2D):
+        new_segment = Turtle("square")
+        new_segment.color("red")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+
     def create_snake(self):
         """Create a snake of length 3 (squares)"""
         for position in STARTING_POSITIONS:
-            new_segment = Turtle('square')
-            new_segment.penup()
-            new_segment.goto(position)
-            # new_segment.speed(0)
-            # print(new_segment.get_shapepoly())
-            # new_segment.stamp()
-            # print(f"1.{new_segment.pos()=}")
-            # print(new_segment.shearfactor())
-            # new_segment.color('green')
-            # # new_segment.shearfactor(-1.5)
-            # print(f"{new_segment.pos()=}")
-            # print(new_segment.get_shapepoly())
-            # increase = tuple(2 * num for num in new_segment.turtlesize())
-            # print(new_segment.turtlesize(*increase))
-            new_segment.color('red')
-            self.segments.append(new_segment)
+            self.add_segment(position)
+            # new_segment = Turtle('square')
+            # new_segment.penup()
+            # new_segment.goto(position)
+            # # new_segment.speed(0)
+            # # print(new_segment.get_shapepoly())
+            # # new_segment.stamp()
+            # # print(f"1.{new_segment.pos()=}")
+            # # print(new_segment.shearfactor())
+            # # new_segment.color('green')
+            # # # new_segment.shearfactor(-1.5)
+            # # print(f"{new_segment.pos()=}")
+            # # print(new_segment.get_shapepoly())
+            # # increase = tuple(2 * num for num in new_segment.turtlesize())
+            # # print(new_segment.turtlesize(*increase))
+            # new_segment.color('red')
+            # self.segments.append(new_segment)
 
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):
