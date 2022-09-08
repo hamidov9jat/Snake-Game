@@ -16,10 +16,10 @@ sn = Snake(screen)
 fd = Food(screen)
 
 screen.listen()
-screen.onkey(key='Up', fun=sn.up)
-screen.onkey(key='Down', fun=sn.down)
-screen.onkey(key='Left', fun=sn.left)
-screen.onkey(key='Right', fun=sn.right)
+screen.onkey(key='w', fun=sn.up)
+screen.onkey(key='s', fun=sn.down)
+screen.onkey(key='a', fun=sn.left)
+screen.onkey(key='d', fun=sn.right)
 
 game_is_on = True
 while game_is_on:
