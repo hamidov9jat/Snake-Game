@@ -6,6 +6,7 @@ class ScoreBoard(Turtle):
     def __init__(self, screen: Screen):
         super().__init__()
         self.hideturtle()
+        self.color('white')
         self.penup()
         self._screen = screen
         self.sety(screen.window_height() / 2 - 30)
