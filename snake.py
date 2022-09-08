@@ -16,8 +16,16 @@ class Snake:
         self.create_snake()
         self.head: Turtle = self.segments[0]
         self.screen = sn_screen
-        self.scn_w = sn_screen.window_width()
-        self.scn_h = sn_screen.window_height()
+        self.scn_half_w = sn_screen.window_width() // 2
+        self.scn_half_h = sn_screen.window_height() // 2
+
+        # Coordinates of snake block when it passes positive x or y edge of window
+        self.opposite_negative_x = -(self.scn_half_w) + 10
+        self.opposite_negative_y = -(self.scn_half_h) + 10
+
+        # Coordinates of snake block when it passes negative x or y edge of window
+        self.opposite_positive_x = (self.scn_half_w) - 10
+        self.opposite_positive_y = (self.scn_half_h) - 10
 
     def add_segment(self, position: turtle.Vec2D):
         new_segment = Turtle("square")
@@ -55,16 +63,13 @@ class Snake:
         for seg_num in range(len(self.segments) - 1, 0, -1):
             new_x = self.segments[seg_num - 1].xcor()
             new_y = self.segments[seg_num - 1].ycor()
-            is_out_horizontally = abs(new_x) > (self.scn_w // 2)
-            is_out_vertically = abs(new_y) > (self.scn_h // 2)
-
-            opposite_x = -(self.scn_w // 2) + new_x % (self.scn_w // 2)
-            opposite_y = -(self.scn_h // 2) + new_y % (self.scn_h // 2)
+            is_out_horizontally = abs(new_x) > self.scn_half_w
+            is_out_vertically = abs(new_y) > self.scn_half_h
 
             if is_out_horizontally:
-                self.segments[seg_num].setx(opposite_x if new_x >= 0 else new_x % (self.scn_w // 2))
+                self.segments[seg_num].setx(self.opposite_negative_x if new_x >= 0 else self.opposite_positive_x)
             if is_out_vertically:
-                self.segments[seg_num].sety(opposite_y if new_y >= 0 else new_y % (self.scn_h // 2))
+                self.segments[seg_num].sety(self.opposite_negative_y if new_y >= 0 else self.opposite_positive_y)
             if not is_out_horizontally and not is_out_vertically:
                 self.segments[seg_num].goto(new_x, new_y)
 
@@ -72,17 +77,13 @@ class Snake:
         new_x = self.head.xcor() + MOVE_DISTANCE
         new_y = self.head.ycor() + MOVE_DISTANCE
 
-        is_out_horizontally = abs(new_x) > (self.scn_w // 2)
-        is_out_vertically = abs(new_y) > (self.scn_h // 2)
-
-        # Coordinates of snake block when it passes positive x or y edge of window
-        opposite_x = -(self.scn_w // 2) + new_x % (self.scn_w // 2)
-        opposite_y = -(self.scn_h // 2) + new_y % (self.scn_h // 2)
+        is_out_horizontally = abs(new_x) > (self.scn_half_w)
+        is_out_vertically = abs(new_y) > (self.scn_half_h)
 
         if is_out_horizontally:
-            self.head.setx(opposite_x if new_x >= 0 else new_x % (self.scn_w // 2))
+            self.head.setx(self.opposite_negative_x if new_x >= 0 else self.opposite_positive_x)
         if is_out_vertically:
-            self.head.sety(opposite_y if new_y >= 0 else new_y % (self.scn_h // 2))
+            self.head.sety(self.opposite_negative_y if new_y >= 0 else self.opposite_positive_y)
         if not is_out_horizontally and not is_out_vertically:
             self.head.forward(MOVE_DISTANCE)
         # self.head.forward(MOVE_DISTANCE)
