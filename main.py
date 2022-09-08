@@ -8,10 +8,10 @@ from scoreboard import ScoreBoard
 screen = Screen()
 screen.setup(600, 600)
 # screen.screensize()
-print(screen.canvwidth, screen.canvheight)
+# print(screen.canvwidth, screen.canvheight)
 screen.bgcolor('green')
 screen.title('Snake Game')
-screen.tracer(0)
+screen.tracer(50)
 
 sn = Snake(screen)
 fd = Food(screen)
