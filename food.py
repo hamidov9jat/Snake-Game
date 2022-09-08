@@ -3,7 +3,7 @@ import random
 
 
 class Food(Turtle):
-    def __init__(self, fd_screen):
+    def __init__(self, fd_screen: Screen):
         super().__init__('circle')
         self.penup()
         self.shapesize(stretch_wid=.5, stretch_len=.5)
