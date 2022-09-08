@@ -35,7 +35,7 @@ class Snake:
             # print(new_segment.get_shapepoly())
             # increase = tuple(2 * num for num in new_segment.turtlesize())
             # print(new_segment.turtlesize(*increase))
-            # new_segment.color('black')
+            new_segment.color('red')
             self.segments.append(new_segment)
 
     def move(self):
@@ -57,19 +57,19 @@ class Snake:
 
         # These are the new coordinates for the head block
         new_x = self.head.xcor() + MOVE_DISTANCE
-        new_x = self.head.ycor() + MOVE_DISTANCE
+        new_y = self.head.ycor() + MOVE_DISTANCE
 
         is_out_horizontally = abs(new_x) > (self.scn_w / 2)
-        is_out_vertically = abs(new_x) > (self.scn_h / 2)
+        is_out_vertically = abs(new_y) > (self.scn_h / 2)
 
         # Coordinates of snake block when it passes positive x or y edge of window
         opposite_x = -(self.scn_w / 2) + new_x % (self.scn_w / 2)
-        opposite_y = -(self.scn_h / 2) + new_x % (self.scn_h / 2)
+        opposite_y = -(self.scn_h / 2) + new_y % (self.scn_h / 2)
 
         if is_out_horizontally:
             self.head.setx(opposite_x if new_x >= 0 else new_x % (self.scn_w / 2))
         if is_out_vertically:
-            self.head.sety(opposite_y if new_x >= 0 else new_x % (self.scn_h / 2))
+            self.head.sety(opposite_y if new_y >= 0 else new_y % (self.scn_h / 2))
         if not is_out_horizontally and not is_out_vertically:
             self.head.forward(MOVE_DISTANCE)
         # self.head.forward(MOVE_DISTANCE)

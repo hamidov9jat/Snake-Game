@@ -7,9 +7,9 @@ screen = Screen()
 screen.setup(600, 600)
 # screen.screensize()
 print(screen.canvwidth, screen.canvheight)
-# screen.bgcolor('black')
+screen.bgcolor('green')
 screen.title('Snake Game')
-screen.tracer(5)
+screen.tracer(0)
 
 sn = Snake(screen)
 
