@@ -11,7 +11,8 @@ screen.setup(600, 600)
 # print(screen.canvwidth, screen.canvheight)
 screen.bgcolor('green')
 screen.title('Snake Game')
-screen.tracer(50)
+screen.tracer(1, delay=0)
+
 
 sn = Snake(screen)
 fd = Food(screen)
@@ -25,7 +26,7 @@ screen.onkey(key='d', fun=sn.right)
 
 game_is_on = True
 while game_is_on:
-    screen.update()
+    # screen.update()
     time.sleep(0.1)
     sn.move()
     if sn.bite_itself():
