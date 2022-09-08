@@ -23,6 +23,7 @@ class Snake:
         new_segment = Turtle("square")
         new_segment.color("red")
         new_segment.penup()
+        new_segment.speed(0)
         new_segment.goto(position)
         self.segments.append(new_segment)
 
@@ -108,3 +109,4 @@ class Snake:
             if self.head.distance(segment) < 10:
                 return True
         return False
+        # return any(filter(lambda segment: self.head.distance(segment) < 10, self.segments[1:]))
