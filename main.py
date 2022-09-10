@@ -31,6 +31,7 @@ while game_is_on:
     sn.move()
     if sn.bite_itself():
         game_is_on = False
+        score_board.reset()
         score_board.game_over()
     # # Detect collision with tail.
     # for segment in sn.segments[1:]:
@@ -50,6 +51,7 @@ while game_is_on:
         score_board.increase_score()
         if sn.bite_itself():
             game_is_on = False
+            score_board.reset()
             score_board.game_over()
 
 screen.exitonclick()
